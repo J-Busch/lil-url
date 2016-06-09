@@ -8,7 +8,14 @@ module.exports = function(app, db) {
     app.route('/').get(function (req, res) {
         res.sendFile(process.cwd() + '/public/index.html');
     });
-    app.route('/lil').get(function (req, res) {
-        change.say(req, res);
+    
+    app.route('/lil/:url').get(function (req, res) {
+        var url = req.params.url;
+        change.makeUrl(url, res);
+    });
+    
+    app.route('/:count').get(function(req, res) {
+        var count = Number(req.params.count);
+        change.goToUrl(count, res);
     });
 };
