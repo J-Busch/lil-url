@@ -5,11 +5,12 @@ var express = require('express'),
     mongo = require('mongodb').MongoClient;
     
 var app = express();
+var url = process.env.MONGO_URI;
 
-mongo.connect('mongodb://localhost:27017/lil-url', function (err, db) {
+mongo.connect(url, function (err, db) {
     if (err) throw new Error('failed to connect');
     else {
-        console.log('MongoDB connected on port 27017.');
+        console.log('MongoDB connected.');
     }
     
     app.use('/controllers', express.static(process.cwd() + '/app/controllers'));

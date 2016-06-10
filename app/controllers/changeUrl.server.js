@@ -2,7 +2,7 @@
 
 function changeUrl (db) {
     var urls = db.collection('urls');
-    var host = 'https://api-project-spacesquid.c9users.io/';
+    var host = process.env.APP_URL;
     var count = 0;
     
     this.makeUrl = function(url, res) {
