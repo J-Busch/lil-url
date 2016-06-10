@@ -11,7 +11,7 @@ module.exports = function(app, db) {
     
     app.route('/lil/:url').get(function (req, res) {
         var url = req.params.url;
-        change.makeUrl(url.slice(1), res);
+        change.makeUrl(url.slice(5), res);
     });
     
     app.route('/:count').get(function(req, res) {
