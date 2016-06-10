@@ -3,9 +3,11 @@
 var express = require('express'),
     routes = require('./app/routes/index.js'),
     mongo = require('mongodb').MongoClient;
-    
+
+var url = process.env.MONGO_URI;    
 var app = express();
-var url = process.env.MONGO_URI;
+
+app.set('port', (process.env.PORT || 8080));
 
 mongo.connect(url, function (err, db) {
     if (err) throw new Error('failed to connect');
@@ -18,7 +20,7 @@ mongo.connect(url, function (err, db) {
     
     routes(app, db);
     
-    app.listen(process.env.PORT || 8080, function () {
+    app.listen(app.get('port'), function () {
         console.log('Listening on port 8080');
     });
 });
