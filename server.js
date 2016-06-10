@@ -4,7 +4,7 @@ var express = require('express'),
     routes = require('./app/routes/index.js'),
     mongo = require('mongodb').MongoClient;
 
-var url = process.env.MONGO_URI;    
+var url = process.env.MONGOLAB_URI;    
 var app = express();
 
 app.set('port', (process.env.PORT || 8080));
