@@ -7,7 +7,7 @@ var express = require('express'),
 var app = express();
 
 mongo.connect('mongodb://localhost:27017/lil-url', function (err, db) {
-    if (err) throw new Error('Failed To Connect');
+    if (err) throw new Error('failed to connect');
     else {
         console.log('MongoDB connected on port 27017.');
     }
