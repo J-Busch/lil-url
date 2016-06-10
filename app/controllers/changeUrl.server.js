@@ -7,6 +7,7 @@ function changeUrl (db) {
     
     this.makeUrl = function(url, res) {
         count++;
+        url = url.path.replace('/lil/', '')
         if (validUrl(url)) {
             urls.save({'orig_url' : url, 'count' : count}, function(err, data) {
                 if (err) throw new Error('could not save url');
