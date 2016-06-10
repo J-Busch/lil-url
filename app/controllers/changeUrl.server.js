@@ -5,9 +5,9 @@ function changeUrl (db) {
     var host = process.env.APP_URL;
     var count = 0;
     
-    this.makeUrl = function(url, res) {
+    this.makeUrl = function(req, res) {
         count++;
-        url = url.path.replace('/lil/', '')
+        var url = req.url.slice(5);
         if (validUrl(url)) {
             urls.save({'orig_url' : url, 'count' : count}, function(err, data) {
                 if (err) throw new Error('could not save url');
