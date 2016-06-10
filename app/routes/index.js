@@ -10,7 +10,7 @@ module.exports = function(app, db) {
     });
     
     app.route('/lil/:url').get(function (req, res) {
-        var url = req.params.url.slice(5);
+        var url = req.params.url;
         change.makeUrl(url, res);
     });
     
