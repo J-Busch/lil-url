@@ -7,10 +7,13 @@
     <body>
         <h1>Lil URL --- URL Condensing Microservice</h1>
         <hr />
-        <h3>Example Usage</h3>
-        <h4>Input: https://api-project-spacesquid.c9users.io/lil/codepen.io/J-Busch/#</h4>
-        <h4>Output: {some json stuff}</h4>
-        <h4>Orig_url redirects to your site ayyyyy</h4>
+        <h3>How To Use</h3>
+        <h4>Input:</h4>
+        <p><em>note: valid urls follow -- /https?:\/\/www\..+\.com/</em></p>
+        <p>https://lil-url.herokuapp.com/lil/https://www.mlab.com/home</p>
+        <h4>Output:</h4>
+        <p>{"orig_url":"https://www.mlab.com/home","lil_url":"https://lil-url.herokuapp.com/3"}</p>
+        <p>"https://lil-url.herokuapp.com/3" redirects to "https://www.mlab.com/home"</p>
         <hr />
         <p>By Joel Busch</p>
     </body>
