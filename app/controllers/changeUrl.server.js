@@ -3,15 +3,17 @@
 function changeUrl (db) {
     var urls = db.collection('urls');
     var host = process.env.APP_URL;
-    var count = 0;
     
     this.makeUrl = function(req, res) {
-        count++;
-        var url = req.url.slice(5);
+        var url = String(req.url.slice(5));
         if (validUrl(url)) {
-            urls.save({'orig_url' : url, 'count' : count}, function(err, data) {
-                if (err) throw new Error('could not save url');
-                res.json({'orig_url' : url, 'lil_url' : host + count});
+            urls.find({}, {count : true, _id : false}).sort({count : -1}).limit(1).exec(function(err, result) {
+                if (err) throw err;
+                
+                urls.save({'orig_url' : url, 'count' : result[0].count + 1}, function(err) {
+                    if (err) throw new Error('could not save url');
+                    res.json({'orig_url' : url, 'lil_url' : host + result[0].count + 1});
+                });
             });
         } else {
             res.json({'error: ' : 'that is not a valid url =('});
