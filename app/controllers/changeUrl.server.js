@@ -7,12 +7,13 @@ function changeUrl (db) {
     this.makeUrl = function(req, res) {
         var url = String(req.url.slice(5));
         if (validUrl(url)) {
-            urls.find({}, {count : true, _id : false}).sort({count : -1}).limit(1).exec(function(err, result) {
+            urls.count({}, function(err, result) {
                 if (err) throw err;
                 
-                urls.save({'orig_url' : url, 'count' : result[0].count + 1}, function(err) {
+                urls.save({'orig_url' : url, 'count' : result + 1}, function(err) {
                     if (err) throw new Error('could not save url');
-                    res.json({'orig_url' : url, 'lil_url' : host + result[0].count + 1});
+                    var temp = result + 1;
+                    res.json({'orig_url' : url, 'lil_url' : host + temp});
                 });
             });
         } else {
@@ -24,7 +25,7 @@ function changeUrl (db) {
         urls.find({'count' : ct}).limit(1).toArray(function(err, doc) {
             if (err) throw new Error('could not find url');
             var orig = doc[0].orig_url;
-            if (doc.length > 0) {
+            if (doc) {
                 res.redirect(orig);
             } else {
                 res.json({'error: ' : 'could not find original url =('});
